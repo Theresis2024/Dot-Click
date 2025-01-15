@@ -1,7 +1,7 @@
 let walls = [];
 let particle;
 
-let wallCount = 7; // Increased from 5 to 7 (2 more arches)
+let wallCount = 7; // Total number of arcs
 let rayStep = 2; // Angle step for rays (lower = more rays, adjust for performance)
 let arcStep = 0.05; // Step size for approximating arcs (adaptive resolution)
 let rotationSpeed = 0.002; // Speed of rotation
@@ -11,8 +11,8 @@ let minDistanceFromSource = 100; // Minimum distance from the light source
 let maxDistanceFromSource = 150; // Maximum distance from the light source
 
 function setup() {
-  createCanvas(500, 500, P2D); // Use P2D renderer for better performance
-  pixelDensity(1); // Reduce pixel density for faster rendering
+  createCanvas(windowWidth, windowHeight, P2D); // Fullscreen canvas
+  pixelDensity(1); // Reduce pixel density for performance
 
   // Create random arcs at a safe distance away from the light source
   for (let i = 0; i < wallCount; i++) {
@@ -55,6 +55,11 @@ function draw() {
   // The particle remains fixed at the center, no mouse interaction for position
   particle.show();
   particle.look(walls);
+}
+
+function windowResized() {
+  // Adjust canvas size when the browser window is resized
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 // Arch Class
